@@ -9,6 +9,7 @@ var fs = require('fs');
 // the splitter function, used by the service
 function splitter_function(args) {
   console.log('splitter_function');
+  console.log(args.message);
   var splitter = args.splitter;
   var splitted_msg = args.message.split(splitter);
   var result = [];
@@ -20,6 +21,16 @@ function splitter_function(args) {
   }
 }
 
+function concatter_function(args) {
+  console.log('concatter_function');
+  console.log(args.strings);
+  // let concat_msg = args.strings?.join();
+
+  return {
+    result: 'worked'
+  }
+}
+
 // the service
 var serviceObject = {
   MessageSplitterService: {
@@ -28,6 +39,14 @@ var serviceObject = {
     },
     MessageSplitterServiceSoap12Port: {
       MessageSplitter: splitter_function
+    }
+  },
+  MessageConcatterService: {
+    MessageConcatterServiceSoapPort: {
+      MessageConcatter: concatter_function
+    },
+    MessageConcatterServiceSoap12Port: {
+      MessageConcatter: concatter_function
     }
   }
 };

@@ -11,10 +11,14 @@ soap.createClient(url, function (err, client) {
   * Parameters of the service call: they need to be called as specified
   * in the WSDL file
   */
-  var args = {
+  let args = {
     message: "id1:12:34:56:out42",
     splitter: ":"
   };
+
+  let joinArgs = {
+    strings: ['Hola', 'Mundo', '!!!']
+  }
   // call the service
   client.MessageSplitter(args, function (err, res) {
     if (err)
@@ -22,4 +26,13 @@ soap.createClient(url, function (err, client) {
     // print the service returned result
     console.log(res);
   });
+  client.MessageConcatter(joinArgs, function (err, res) {
+    if (err) {
+      console.log(err.statusMessage);
+      return;
+    }
+    // print the service returned result
+    console.log(res);
+  });
+  console.log(client);
 });

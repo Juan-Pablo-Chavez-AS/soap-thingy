@@ -38,7 +38,7 @@
       <s:element name="MessageConcatterResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="result" type="s:string"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -64,9 +64,6 @@
       <wsdl:input message="tns:MessageSplitterSoapIn"/>
       <wsdl:output message="tns:MessageSplitterSoapOut"/>
     </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="MessageConcatterServiceSoapPort">
-    <!-- The operation name must be the same as the one specified in the service object -->
     <wsdl:operation name="MessageConcatter">
       <wsdl:input message="tns:MessageConcatterSoapIn"/>
       <wsdl:output message="tns:MessageConcatterSoapOut"/>
@@ -77,6 +74,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="MessageSplitter">
       <soap:operation soapAction="MessageSplitter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageConcatter">
+      <soap:operation soapAction="MessageConcatter" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -96,21 +102,6 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="MessageConcatterServiceSoapBinding" type="tns:MessageConcatterServiceSoapPort">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="MessageConcatter">
-      <soap:operation soapAction="MessageConcatter" style="document"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="MessageConcatterServiceSoap12Binding" type="tns:MessageConcatterServiceSoapPort">
-    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="MessageConcatter">
       <soap12:operation soapAction="MessageConcatter" style="document"/>
       <wsdl:input>
@@ -129,12 +120,10 @@
     <wsdl:port name="MessageSplitterServiceSoap12Port" binding="tns:MessageSplitterServiceSoap12Binding">
       <soap12:address location="http://localhost:8000/wsdl"/>
     </wsdl:port>
-  </wsdl:service>
-  <wsdl:service name="MessageConcatterService">
-    <wsdl:port name="MessageConcatterServiceSoapPort" binding="tns:MessageConcatterServiceSoapBinding">
+    <wsdl:port name="MessageConcatterSoapPort" binding="tns:MessageConcatterServiceSoapBinding">
       <soap:address location="http://localhost:8000/wsdl"/>
     </wsdl:port>
-    <wsdl:port name="MessageConcatterServiceSoap12Port" binding="tns:MessageConcatterServiceSoap12Binding">
+    <wsdl:port name="MessageConcatterSoap12Port" binding="tns:MessageConcatterServiceSoap12Binding">
       <soap12:address location="http://localhost:8000/wsdl"/>
     </wsdl:port>
   </wsdl:service>

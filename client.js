@@ -28,11 +28,10 @@ soap.createClient(url, function (err, client) {
   });
   client.MessageConcatter(joinArgs, function (err, res) {
     if (err) {
-      console.log(err.statusMessage);
+      console.log('Failed: ', err.statusMessage);
       return;
     }
     // print the service returned result
     console.log(res);
   });
-  console.log(client);
 });

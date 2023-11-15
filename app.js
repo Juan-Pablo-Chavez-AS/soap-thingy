@@ -24,10 +24,10 @@ function splitter_function(args) {
 function concatter_function(args) {
   console.log('concatter_function');
   console.log(args.strings);
-  // let concat_msg = args.strings?.join();
+  let concat_msg = args.strings?.join('');
 
   return {
-    result: 'worked'
+    result: concat_msg
   }
 }
 
@@ -35,20 +35,22 @@ function concatter_function(args) {
 var serviceObject = {
   MessageSplitterService: {
     MessageSplitterServiceSoapPort: {
-      MessageSplitter: splitter_function
+      MessageSplitter: splitter_function,
+      MessageConcatter: concatter_function
     },
     MessageSplitterServiceSoap12Port: {
-      MessageSplitter: splitter_function
+      MessageSplitter: splitter_function,
+      MessageConcatter: concatter_function
     }
-  },
+  }/*,
   MessageConcatterService: {
-    MessageConcatterServiceSoapPort: {
+    MessageConcatterSoapPort: {
       MessageConcatter: concatter_function
     },
-    MessageConcatterServiceSoap12Port: {
+    MessageConcatterSoap12Port: {
       MessageConcatter: concatter_function
     }
-  }
+  }*/ // sadge
 };
 
 // load the WSDL file
